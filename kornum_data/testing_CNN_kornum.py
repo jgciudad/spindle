@@ -1,9 +1,10 @@
+import sys
+sys.path.append("..")
 from tensorflow.keras.layers import Input, MaxPool2D, Conv2D, Dense, Softmax, Flatten, Dropout
-from metrics import *
-from tools import *
+from SPINDLE.metrics import *
+from SPINDLE.tools import *
 # from hmm import *
-from kornum_data.kornum_data_loading import load_to_dataset, load_labels
-from kornum_data.kornum_data_loading import SequenceDataset
+from kornum_data_loading import SequenceDataset
 
 
 save_path = '/Users/tlj258/results_spindle'

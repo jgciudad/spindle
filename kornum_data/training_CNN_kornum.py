@@ -1,11 +1,14 @@
+import sys
+sys.path.append("..")
 import tensorflow as tf
 import sklearn.metrics
 # import random
 from tensorflow.keras.layers import Input, MaxPool2D, Conv2D, Dense, Flatten, Dropout
-from kornum_data.kornum_data_loading import SequenceDataset
-from metrics import *
+from kornum_data_loading import SequenceDataset
+from SPINDLE.metrics import *
 # from tools import *
 import pickle
+import os
 
 # plt.ion()
 

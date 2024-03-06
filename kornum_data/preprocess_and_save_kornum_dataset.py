@@ -1,4 +1,6 @@
-from kornum_data.kornum_data_loading import load_recording
+import sys
+sys.path.append("..")
+from kornum_data_loading import load_recording
 import os
 import string
 import random
