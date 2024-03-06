@@ -46,13 +46,6 @@ def get_epoch_counts(tsv_files):
     return df
 
 
-# folder_path = r"C:\Users\javig\Documents\Kornum lab data\Laura-EEGdata (original)\data-Kornum"
-# tsv_files = get_tsv_filepaths(folder_path)
-# clean_save_kornum_data(tsv_files)
-# df = get_epoch_counts(tsv_files)
-# df.to_excel(r"C:\Users\javig\Documents\Drive\DTU\MASTER THESIS\Code\SPINDLE\kornum_data\kornum_data.xlsx")
-
-
 def load_labels(labels_path,
                 just_artifact_labels,
                 just_stage_labels):
@@ -171,6 +164,7 @@ def filter_epochs(path, set, just_not_art_epochs, just_artifact_labels):
 
     if set == 'train':
         file_list = file_list[file_list['train'] == 1]
+        file_list = file_list.sample(frac=1).reset_index(drop=True)
     elif set == 'validation':
         file_list = file_list[file_list['validation'] == 1]
     elif set == 'test':
@@ -181,8 +175,8 @@ def filter_epochs(path, set, just_not_art_epochs, just_artifact_labels):
     elif just_not_art_epochs:
         file_list = file_list[file_list['Art'] != 1]
         file_list = file_list[['File', 'NREM', 'REM', 'WAKE']]
-
-    file_list = file_list.sample(frac=1).reset_index(drop=True)
+    else:
+        file_list = file_list[['File', 'NREM', 'REM', 'WAKE', 'Art']]
 
     return file_list
 
@@ -220,10 +214,3 @@ class SequenceDataset(tf.keras.utils.Sequence):
         x, y = load_and_concatenate(batch, self.data_folder)
 
         return x, y
-
-# sd = SequenceDataset(r'C:\Users\javig\Documents\Kornum lab data\to_numpy\spectrograms',
-#                      path,
-#                      'validation',
-#                      100,
-#                      False,
-#                      True)

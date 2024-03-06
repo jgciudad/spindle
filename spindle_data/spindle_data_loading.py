@@ -2,7 +2,7 @@ import mne
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-from final_preprocessing import preprocess_EEG, preprocess_EMG
+from SPINDLE.final_preprocessing import preprocess_EEG, preprocess_EMG
 import string
 import os
 import scipy
@@ -49,6 +49,7 @@ def windowing(signal, window_size=32*5, window_stride=32, fs=128):
 def load_labels(labels_path,
                   scorer,
                   just_artifact_labels,
+                  keep_artifacts,
                   artifact_to_stages,
                   cohort):
 
@@ -75,25 +76,39 @@ def load_labels(labels_path,
         labels = labels_2
 
     if just_artifact_labels==True:
-        labels.loc[(labels['1'] == 1) | (labels['2'] == 1) | (labels['3'] == 1), 'art'] = 1
-        labels.loc[(labels['1'] == 0) & (labels['2'] == 0) & (labels['3'] == 0), 'art'] = 0
+        labels.loc[(labels['1'] == 1) | (labels['2'] == 1) | (labels['3'] == 1), 'Art'] = 1
+        labels.loc[(labels['1'] == 0) & (labels['2'] == 0) & (labels['3'] == 0), 'Art'] = 0
 
-        labels = labels['art']
+        labels = labels['Art']
     elif just_artifact_labels==False:
-        if artifact_to_stages==True:
-            if cohort=='d':
-                if '1' in labels.columns:
+        if keep_artifacts==True:
+            if artifact_to_stages==True:
+                if cohort=='d':
+                    if '1' in labels.columns:
+                        labels.loc[labels["1"] == 1, 'w'] = 1
+                        labels.drop('1', axis=1, inplace=True)
+                else: 
                     labels.loc[labels["1"] == 1, 'w'] = 1
-                    labels.drop('1', axis=1, inplace=True)
-            else: 
-                labels.loc[labels["1"] == 1, 'w'] = 1
-                labels.loc[labels["2"] == 1, 'n'] = 1
-                labels.loc[labels["3"] == 1, 'r'] = 1
+                    labels.loc[labels["2"] == 1, 'n'] = 1
+                    labels.loc[labels["3"] == 1, 'r'] = 1
 
-                labels = labels.iloc[:, -3:]
-        elif artifact_to_stages==False:
+                    labels = labels.iloc[:, -3:]
+            elif artifact_to_stages==False:
+                if cohort=='d':
+                    if '1' in labels.columns:
+                        labels.loc[labels['1'] == 1, 'Art'] = 1
+                        labels.loc[labels['1'] == 0, 'Art'] = 0
+                        labels.drop('1', axis=1, inplace=True)
+                else: 
+                    labels.loc[(labels['1'] == 1) | (labels['2'] == 1) | (labels['3'] == 1), 'Art'] = 1
+                    labels.loc[(labels['1'] == 0) & (labels['2'] == 0) & (labels['3'] == 0), 'Art'] = 0
+
+                    labels.drop(['1', '2', '3'], axis=1, inplace=True)
+        elif keep_artifacts==False:
             labels.drop(labels.loc[(labels['1'] == 1) | (labels['2'] == 1) | (labels['3'] == 1)].index, inplace=True)
             labels = labels.iloc[:, -3:]
+
+    labels.rename(columns={"w": "WAKE", "n": "NREM", "r": "REM"})
 
     return labels
 
@@ -126,6 +141,7 @@ def load_recording(signal_paths,
                    scorer,
                    just_artifact_labels,
                    artifact_to_stages,
+                   keep_artifacts,
                    balance_artifacts,
                    validation_split,
                    cohort):  # stft_size, stft_stride, fs, epoch_length,
@@ -160,6 +176,7 @@ def load_recording(signal_paths,
             y_mouse = load_labels(labels_paths[i],
                                   scorer=scorer,
                                   just_artifact_labels=just_artifact_labels,
+                                  keep_artifacts=keep_artifacts,
                                   artifact_to_stages=artifact_to_stages,
                                   cohort=cohort)
             x_mouse = x_mouse[y_mouse.index.to_numpy() - 2]  # Select just the epochs in y
@@ -313,34 +330,34 @@ def load_and_concatenate2(batch, data_folder):
     return x, y
 
 
-def filter_epochs(path, set, just_stage_labels, just_artifact_labels):
+def filter_epochs(path, set, just_not_art_epochs, just_artifact_labels):
     file_list = pd.read_csv(path)
 
     if set == 'train':
         file_list = file_list[file_list['train'] == 1]
+        file_list = file_list.sample(frac=1).reset_index(drop=True)
     elif set == 'validation':
         file_list = file_list[file_list['validation'] == 1]
     elif set == 'test':
         file_list = file_list[file_list['test'] == 1]
 
-    file_list = file_list.drop(file_list.columns[[4, 5, 6]], axis=1)
-
     if just_artifact_labels:
         file_list = file_list[['File', 'Art']]
-    elif just_stage_labels:
+    elif just_not_art_epochs:
+        file_list = file_list[file_list['Art'] != 1]
         file_list = file_list[['File', 'NREM', 'REM', 'WAKE']]
-
-    file_list = file_list.sample(frac=1).reset_index(drop=True)
+    else:
+        file_list = file_list[['File', 'NREM', 'REM', 'WAKE', 'Art']]
 
     return file_list
 
 
 class SequenceDataset2(tf.keras.utils.Sequence):
 
-    def __init__(self, data_folder, csv_path, set, batch_size, just_stage_labels, just_artifact_labels):
+    def __init__(self, data_folder, csv_path, set, batch_size, just_not_art_epochs, just_artifact_labels):
 
         self.data_folder = data_folder
-        self.file_list = filter_epochs(csv_path, set, just_stage_labels, just_artifact_labels)
+        self.file_list = filter_epochs(csv_path, set, just_not_art_epochs, just_artifact_labels)
         self.batch_size = batch_size
 
     def __len__(self):

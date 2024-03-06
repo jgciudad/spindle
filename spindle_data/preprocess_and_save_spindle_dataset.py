@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 from spindle_data_loading import load_recording
 import os
 import string
@@ -5,21 +7,34 @@ import random
 import pandas as pd
 import numpy as np
 
-dataset_folder = r'C:\Users\javig\Desktop\SPINDLE dataset\SPINDLE dataset\data (original)\CohortA'
-destination_folder = r'C:\Users\javig\Desktop\SPINDLE dataset\SPINDLE dataset\preprocessed_saved_as_kornum_2'
 
-training_validation_labels = [r'scorings\A1.csv',
-                              r'scorings\A2.csv']
+# WARNING!!!! MAKE SURE THE DESTINATION FOLDER IS NOT WITHIN ONEDRIVE OR ANY OTHER BACKUP SYSTEM, IT WILL MAKE IT COLLAPSE
 
-training_validation_signals = [r'recordings\A1.edf',
-                               r'recordings\A2.edf']
+# dataset_folder = '/scratch/s202283/data/Laura-EEGdata_cleaned'
+# destination_folder = '/scratch/s202283/data/spindle_data/numpy'
+dataset_folder = '/Users/tlj258/Library/CloudStorage/OneDrive-UniversityofCopenhagen/Documents/THESIS_DATA/SPINDLE/original_data/CohortA'
+destination_folder = '/Users/tlj258/preprocessed_spindle_data/spindle' # needs to be an empty  directory 
+if not os.path.exists(destination_folder):
+    os.makedirs(destination_folder)
+elif len(os.listdir(destination_folder)) != 0:
+    raise Exception('Destination folder ' + destination_folder + ' is not empty')
+SCORER = 1
+COHORT = 'a'
 
-test_labels = [r'scorings\A3.csv',
-                r'scorings\A4.csv']
+training_validation_labels = ['scorings/A1.csv',
+                              'scorings/A2.csv']
 
-test_signals = [r'recordings\A3.edf',
-               r'recordings\A4.edf']
+training_validation_signals = ['recordings/A1.edf',
+                               'recordings/A2.edf']
 
+test_labels = ['scorings/A3.csv',
+               'scorings/A4.csv']
+
+test_signals = ['recordings/A3.edf',
+                'recordings/A4.edf']
+
+
+#-----------------------------------------------------------------------------------------------------------------
 
 def save_to_numpy(data, labels, path, df_all, set):
     filenames = []
@@ -33,7 +48,7 @@ def save_to_numpy(data, labels, path, df_all, set):
         np.save(os.path.join(path, filename), r)
         filenames.append(filename)
 
-    df = pd.DataFrame(labels, columns=['NREM', 'REM', 'WAKE'])
+    df = pd.DataFrame(labels, columns=['NREM', 'REM', 'WAKE', 'Art'])
     filenames = [f + '.npy' for f in filenames]
     df.insert(0, 'File', filenames)
 
@@ -67,11 +82,13 @@ for i in range(len(test_signals)):
 
     x, y = load_recording([dataset_folder + os.sep + test_signals[i]],
                           [dataset_folder + os.sep + test_labels[i]],
-                          scorer=1,
+                          scorer=SCORER,
                           just_artifact_labels=False,
-                          artifact_to_stages=True,
+                          artifact_to_stages=False,
+                          keep_artifacts=True,
                           balance_artifacts=False,
-                          validation_split=0)
+                          validation_split=0,
+                          cohort=COHORT)
 
     if i == 0:
         df_all = None
@@ -86,11 +103,13 @@ for i in range(len(training_validation_signals)):
 
     x_train, x_val, labels_train, labels_val = load_recording([dataset_folder + os.sep + training_validation_signals[i]],
                                                               [dataset_folder + os.sep + training_validation_labels[i]],
-                                                              scorer=1,
+                                                              scorer=SCORER,
                                                               just_artifact_labels=False,
-                                                              artifact_to_stages=True,
+                                                              artifact_to_stages=False,
+                                                              keep_artifacts=True,
                                                               balance_artifacts=False,
-                                                              validation_split=0.15)
+                                                              validation_split=0.15,
+                                                              cohort=COHORT)
 
     # if i==0:
     #     df_all = None

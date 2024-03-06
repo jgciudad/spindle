@@ -466,7 +466,7 @@ class BinaryWeightedCrossEntropy(tf.keras.losses.Loss):
         return ce
 
 class MyCustomCallback(tf.keras.callbacks.Callback):
-    def __init__(self, validation_dataset, save_checkpoint_path, evaluation_rate, improvement_threshold, early_stopping_thr):
+    def __init__(self, validation_dataset, save_checkpoint_path, evaluation_rate, improvement_threshold, early_stopping_thr, artifact_detection):
         self.validation_dataset = validation_dataset
         self.path = save_checkpoint_path
         self.evaluation_rate = evaluation_rate
@@ -475,6 +475,7 @@ class MyCustomCallback(tf.keras.callbacks.Callback):
         self.counter = 0
         self.early_stopping_thr = early_stopping_thr
         self.history = []
+        self.artifact_detection = artifact_detection
 
         if os.path.isfile(os.path.join(self.path, "validation_log.txt")):
             os.remove(os.path.join(self.path, "validation_log.txt"))
@@ -490,7 +491,8 @@ class MyCustomCallback(tf.keras.callbacks.Callback):
                 x, y_true_batch = self.validation_dataset.__getitem__(i)
                 y_true_batch = tf.convert_to_tensor(y_true_batch)
                 y_pred_batch = self.model.predict(x, verbose=0)
-                y_pred_batch = tf.one_hot(tf.math.argmax(y_pred_batch, axis=1), depth=3)
+                if not self.artifact_detection:
+                    y_pred_batch = tf.one_hot(tf.math.argmax(y_pred_batch, axis=1), depth=3)
 
                 y_true.append(y_true_batch)
                 y_pred.append(y_pred_batch)
@@ -498,8 +500,13 @@ class MyCustomCallback(tf.keras.callbacks.Callback):
             y_true = tf.concat(y_true, axis=0)
             y_pred = tf.concat(y_pred, axis=0)
 
-            y_true = tf.math.argmax(y_true, axis=1)
-            y_pred = tf.math.argmax(y_pred, axis=1)
+            if not self.artifact_detection:
+                y_true = tf.math.argmax(y_true, axis=1)
+                y_pred = tf.math.argmax(y_pred, axis=1)
+            else:
+                y_pred = tf.where(y_pred>0.5, 1, 0)
+                y_true = tf.cast(y_true, tf.int32)
+
             bal_acc = sklearn.metrics.balanced_accuracy_score(y_true=y_true, y_pred=y_pred)
 
             print('Validation balanced accuracy: ', bal_acc)

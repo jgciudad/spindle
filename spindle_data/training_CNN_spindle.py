@@ -1,25 +1,29 @@
+import sys
+sys.path.append("..")
 import tensorflow as tf
 import sklearn.metrics
 # import random
 from tensorflow.keras.layers import Input, MaxPool2D, Conv2D, Dense, Flatten, Dropout
-from kornum_data.kornum_data_loading import SequenceDataset
-from metrics import *
+from spindle_data_loading import SequenceDataset, SequenceDataset2, load_to_dataset
+from SPINDLE.metrics import *
 # from tools import *
 import pickle
+import os
 
 # plt.ion()
 
 save_path = '/Users/tlj258/results_spindle'
-model_name = 'A_3'
+model_name = 'A_6'
 
-data_path = '/Users/tlj258/preprocessed_spindle_data/kornum'
+data_path = '/Users/tlj258/preprocessed_spindle_data/spindle'
 csv_path = os.path.dirname(data_path) + '/labels_all.csv'
 
 BATCH_SIZE = 300
 TRAINING_EPOCHS = 1
-ARTIFACT_DETECTION = False # This will produce only artifact/not artifact labels
-JUST_NOT_ART_EPOCHS = True # This will filter out the artifact epochs and keep only the non-artifacts. Can only be true if ARTIFACT_DETECTION=False.
+ARTIFACT_DETECTION = True # This will produce only artifact/not artifact labels
+JUST_NOT_ART_EPOCHS = False # This will filter out the artifact epochs and keep only the non-artifacts. Can only be true if ARTIFACT_DETECTION=False.
 LOSS_TYPE = 'weighted_ce' # 'weighted_ce' or 'normal_ce'
+
 
 
 # -------------------------------------------------------------------------------------------------------------------------
@@ -29,6 +33,7 @@ if ARTIFACT_DETECTION==False:
     last_activation = 'softmax'
     if JUST_NOT_ART_EPOCHS==False:
         NCLASSES_MODEL = 4
+        raise Exception('Testing for JUST_NOT_ART_EPOCHS==False not implemented. compute_and_save_metrics_cnn1() needs to be adapted.')
     else:
         NCLASSES_MODEL = 3
 
@@ -61,19 +66,19 @@ print("Devices available: ", tf.config.list_physical_devices())
 
 # -------------------------------------------------------------------------------------------------------------------------
 
-train_sequence = SequenceDataset(data_folder=data_path,
-                                 csv_path=csv_path,
-                                 set='train',
-                                 batch_size=BATCH_SIZE,
-                                 just_not_art_epochs=JUST_NOT_ART_EPOCHS,
-                                 just_artifact_labels=JUST_ARTIFACT_LABELS)
+train_sequence = SequenceDataset2(data_folder=data_path,
+                                  csv_path=csv_path,
+                                  set='train',
+                                  batch_size=BATCH_SIZE,
+                                  just_not_art_epochs=JUST_NOT_ART_EPOCHS,
+                                  just_artifact_labels=JUST_ARTIFACT_LABELS)
 
-val_sequence = SequenceDataset(data_folder=data_path,
-                               csv_path=csv_path,
-                               set='validation',
-                               batch_size=BATCH_SIZE,
-                               just_not_art_epochs=JUST_NOT_ART_EPOCHS,
-                               just_artifact_labels=JUST_ARTIFACT_LABELS)
+val_sequence = SequenceDataset2(data_folder=data_path,
+                                  csv_path=csv_path,
+                                  set='validation',
+                                  batch_size=BATCH_SIZE,
+                                  just_not_art_epochs=JUST_NOT_ART_EPOCHS,
+                                  just_artifact_labels=JUST_ARTIFACT_LABELS)
 
 # -------------------------------------------------------------------------------------------------------------------------
 
@@ -97,7 +102,8 @@ checkpoint_callback = MyCustomCallback(validation_dataset=val_sequence,
                                        save_checkpoint_path=checkpoint_path,
                                        evaluation_rate=int(len(train_sequence)/10),
                                        improvement_threshold=0.001,
-                                       early_stopping_thr=10)
+                                       early_stopping_thr=10,
+                                       artifact_detection=ARTIFACT_DETECTION)
 
 spindle_model.compile(optimizer=tf.keras.optimizers.legacy.Adam(learning_rate=5 * 1e-5,
                                                                 beta_1=0.9,

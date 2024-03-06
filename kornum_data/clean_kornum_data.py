@@ -49,7 +49,7 @@ for i in range(len(labels)):
     edf_signal.export(signal_path, overwrite=True)
 
 
-# CASE 2: FILES WHERE UNSCORED LABELS NEED TO DISCARDED FROM THE END OF THE SIGNAL (AND THE LABELS)
+# CASE 2: FILES WHERE UNSCORED EPOCHS NEED TO DISCARDED FROM THE END OF THE SIGNAL (AND THE LABELS)
 # I checked that it works properly
 
 labels = [r"C:\Users\javig\Documents\Kornum lab data\Laura-EEGdata (original)\data-Kornum\2DTUSERVER-LOUISE\tsv\M20-b3.tsv",
@@ -92,7 +92,7 @@ for i in range(len(labels)):
     tsv_data_2.to_csv(label_path, header=False, index=False)
 
 
-# CASE 3:FILES WHERE UNSCORED LABELS NEED TO DISCARDED FROM THE BEGINNING OF THE SIGNAL (AND THE LABELS)
+# CASE 3:FILES WHERE UNSCORED LABELS NEED TO BE DISCARDED FROM THE BEGINNING OF THE SIGNAL (AND THE LABELS)
 # I checked that it works properly
 
 labels = [r"C:\Users\javig\Documents\Kornum lab data\Laura-EEGdata (original)\data-Kornum\2DTUSERVER-Maria\tsv\m86-b1.tsv",
