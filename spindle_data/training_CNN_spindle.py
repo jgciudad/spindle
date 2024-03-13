@@ -5,17 +5,17 @@ import sklearn.metrics
 # import random
 from tensorflow.keras.layers import Input, MaxPool2D, Conv2D, Dense, Flatten, Dropout
 from spindle_data_loading import SequenceDataset, SequenceDataset2, load_to_dataset
-from SPINDLE.metrics import *
+from metrics import *
 # from tools import *
 import pickle
 import os
 
 # plt.ion()
 
-save_path = '/Users/tlj258/results_spindle'
+save_path = '/Users/qgf169/Documents/python/spindle/results/'
 model_name = 'A_6'
 
-data_path = '/Users/tlj258/preprocessed_spindle_data/spindle'
+data_path = '/Volumes/T9/SPINDLE2-data/preprocessed/'
 csv_path = os.path.dirname(data_path) + '/labels_all.csv'
 
 BATCH_SIZE = 300

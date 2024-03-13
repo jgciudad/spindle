@@ -12,8 +12,8 @@ import numpy as np
 
 # dataset_folder = '/scratch/s202283/data/Laura-EEGdata_cleaned'
 # destination_folder = '/scratch/s202283/data/spindle_data/numpy'
-dataset_folder = '/Users/tlj258/Library/CloudStorage/OneDrive-UniversityofCopenhagen/Documents/THESIS_DATA/SPINDLE/original_data/CohortA'
-destination_folder = '/Users/tlj258/preprocessed_spindle_data/spindle' # needs to be an empty  directory 
+dataset_folder = '/Volumes/T9/SPINDLE2-data/original_data/CohortA/'
+destination_folder = '/Volumes/T9/SPINDLE2-data/preprocessed/' # needs to be an empty  directory 
 if not os.path.exists(destination_folder):
     os.makedirs(destination_folder)
 elif len(os.listdir(destination_folder)) != 0:
