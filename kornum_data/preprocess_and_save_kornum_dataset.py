@@ -246,3 +246,5 @@ for i in range(len(validation_signals)):
     file_counter += 1
 
 df_all.to_csv(os.path.dirname(destination_folder) + '/labels_all.csv', index=False)
+
+print('Preprocessing finished')
