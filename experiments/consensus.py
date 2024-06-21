@@ -154,3 +154,12 @@ df_lab5_sc2 = pd.DataFrame(flattened_arrays).T
 
 df_lab5_sc1.to_csv("/zhome/dd/4/109414/Validationstudy/spindle/consensus_data/preprocessed/df_lab5_sc1.csv",index=False)
 df_lab5_sc2.to_csv("/zhome/dd/4/109414/Validationstudy/spindle/consensus_data/preprocessed/df_lab5_sc2.csv",index=False)
+
+for k in range(df_lab5_sc1.shape[1]):
+    fig, axs = plt.subplots(2, 1, figsize=(12, 8))
+    axs[0].plot(df_lab5_sc1.iloc[:,k])
+    axs[0].set_ylim(0, 5)
+    axs[1].plot(df_lab5_sc2.iloc[:,k])
+    axs[1].set_ylim(0, 5)
+
+    plt.savefig("/zhome/dd/4/109414/Validationstudy/spindle/results/consensus/traces_"+str(k)+".png")
