@@ -1,0 +1,127 @@
+{
+    "os": "Linux-5.4.276-1.el7.elrepo.x86_64-x86_64-with-glibc2.17",
+    "python": "3.9.18",
+    "heartbeatAt": "2024-07-03T15:35:54.811876",
+    "startedAt": "2024-07-03T15:35:53.891693",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--experiment",
+        "standard_config_spindle",
+        "--test_lab",
+        "",
+        "--save_dir",
+        "/zhome/dd/4/109414/Validationstudy/spindle/results/spindle_test/"
+    ],
+    "state": "running",
+    "program": "/zhome/dd/4/109414/Validationstudy/spindle/training_CNN_spindle.py",
+    "codePathLocal": "training_CNN_spindle.py",
+    "codePath": "training_CNN_spindle.py",
+    "git": {
+        "remote": "https://github.com/jgciudad/spindle.git",
+        "commit": "f53815dff2a8c6f7dec80cbb9f8c662cacc5f4f4"
+    },
+    "email": "laurarose@sund.ku.dk",
+    "root": "/zhome/dd/4/109414/Validationstudy/spindle",
+    "host": "hpclogin1",
+    "username": "laurose",
+    "executable": "/zhome/dd/4/109414/miniconda3/envs/spindle_javier/bin/python",
+    "cpu_count": 16,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 1385.0756875000004,
+        "min": 1200.0,
+        "max": 2900.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1262.114,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1199.947,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1363.998,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1199.878,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1599.947,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1200.771,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1200.032,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1401.482,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1200.207,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 2899.999,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1199.623,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1299.482,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1200.158,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1200.107,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1200.191,
+            "min": 1200.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1200.061,
+            "min": 1200.0,
+            "max": 2900.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 71.9168586730957,
+            "used": 12.606689453125
+        }
+    },
+    "memory": {
+        "total": 188.26519775390625
+    }
+}

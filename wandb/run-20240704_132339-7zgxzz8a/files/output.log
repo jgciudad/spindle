@@ -1,0 +1,14 @@
+Devices available:  [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
+Start of epoch 0
+Epoch 0 metrics: {'categorical_accuracy': 0.9536007, 'f1_score': 0.9228373, 'balance_accuracy': 0.95164216, 'epoch': 0, 'val_f1': 0.95732826}
+Start of epoch 1
+Epoch 1 metrics: {'categorical_accuracy': 0.972294, 'f1_score': 0.95805424, 'balance_accuracy': 0.9738114, 'epoch': 1, 'val_f1': 0.960976}
+Start of epoch 2
+Epoch 2 metrics: {'categorical_accuracy': 0.97522795, 'f1_score': 0.96218693, 'balance_accuracy': 0.9772423, 'epoch': 2, 'val_f1': 0.9651286}
+Start of epoch 3
+Epoch 3 metrics: {'categorical_accuracy': 0.97867143, 'f1_score': 0.96907043, 'balance_accuracy': 0.9814379, 'epoch': 3, 'val_f1': 0.9700181}
+Start of epoch 4
+Early stopping counter: 1 out of 2
+Epoch 4 metrics: {'categorical_accuracy': 0.9797959, 'f1_score': 0.9718454, 'balance_accuracy': 0.98277235, 'epoch': 4, 'val_f1': 0.96909827}
+WARNING:tensorflow:From /zhome/dd/4/109414/miniconda3/envs/spindle_javier/lib/python3.9/site-packages/tensorflow/python/checkpoint/checkpoint.py:1453: NameBasedSaverStatus.__init__ (from tensorflow.python.checkpoint.checkpoint) is deprecated and will be removed in a future version.
+Instructions for updating:

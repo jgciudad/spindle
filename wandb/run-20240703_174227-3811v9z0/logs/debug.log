@@ -1,0 +1,27 @@
+2024-07-03 17:42:27,418 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Current SDK version is 0.17.3
+2024-07-03 17:42:27,419 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Configure stats pid to 18199
+2024-07-03 17:42:27,419 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Loading settings from /zhome/dd/4/109414/.config/wandb/settings
+2024-07-03 17:42:27,420 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Loading settings from /zhome/dd/4/109414/Validationstudy/spindle/wandb/settings
+2024-07-03 17:42:27,420 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-07-03 17:42:27,421 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-07-03 17:42:27,421 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'training_CNN_spindle.py', 'program_abspath': '/zhome/dd/4/109414/Validationstudy/spindle/training_CNN_spindle.py', 'program': '/zhome/dd/4/109414/Validationstudy/spindle/training_CNN_spindle.py'}
+2024-07-03 17:42:27,421 INFO    MainThread:18199 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-07-03 17:42:27,422 INFO    MainThread:18199 [wandb_init.py:_log_setup():520] Logging user logs to /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_174227-3811v9z0/logs/debug.log
+2024-07-03 17:42:27,422 INFO    MainThread:18199 [wandb_init.py:_log_setup():521] Logging internal logs to /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_174227-3811v9z0/logs/debug-internal.log
+2024-07-03 17:42:27,423 INFO    MainThread:18199 [wandb_init.py:init():560] calling init triggers
+2024-07-03 17:42:27,423 INFO    MainThread:18199 [wandb_init.py:init():567] wandb.init called with sweep_config: {}
+config: {'learning_rate': 5e-05, 'architecture': 'SPINDLE', 'dataset': 'SPINDLE', 'epochs': 10}
+2024-07-03 17:42:27,424 INFO    MainThread:18199 [wandb_init.py:init():610] starting backend
+2024-07-03 17:42:27,424 INFO    MainThread:18199 [wandb_init.py:init():614] setting up manager
+2024-07-03 17:42:27,433 INFO    MainThread:18199 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-07-03 17:42:27,437 INFO    MainThread:18199 [wandb_init.py:init():622] backend started and connected
+2024-07-03 17:42:27,452 INFO    MainThread:18199 [wandb_init.py:init():711] updated telemetry
+2024-07-03 17:42:27,490 INFO    MainThread:18199 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-07-03 17:42:28,071 INFO    MainThread:18199 [wandb_run.py:_on_init():2402] communicating current version
+2024-07-03 17:42:28,216 INFO    MainThread:18199 [wandb_run.py:_on_init():2411] got version response 
+2024-07-03 17:42:28,217 INFO    MainThread:18199 [wandb_init.py:init():795] starting run threads in backend
+2024-07-03 17:42:31,683 INFO    MainThread:18199 [wandb_run.py:_console_start():2380] atexit reg
+2024-07-03 17:42:31,684 INFO    MainThread:18199 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2024-07-03 17:42:31,685 INFO    MainThread:18199 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2024-07-03 17:42:31,685 INFO    MainThread:18199 [wandb_run.py:_redirect():2325] Redirects installed.
+2024-07-03 17:42:31,689 INFO    MainThread:18199 [wandb_init.py:init():838] run started, returning control to user process

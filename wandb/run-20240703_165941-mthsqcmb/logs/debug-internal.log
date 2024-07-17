@@ -1,0 +1,120 @@
+2024-07-03 16:59:41,341 INFO    StreamThr :2252 [internal.py:wandb_internal():85] W&B internal server running at pid: 2252, started at: 2024-07-03 16:59:41.337730
+2024-07-03 16:59:41,347 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status
+2024-07-03 16:59:41,361 INFO    WriterThread:2252 [datastore.py:open_for_write():87] open: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/run-mthsqcmb.wandb
+2024-07-03 16:59:41,364 DEBUG   SenderThread:2252 [sender.py:send():379] send: header
+2024-07-03 16:59:41,408 DEBUG   SenderThread:2252 [sender.py:send():379] send: run
+2024-07-03 16:59:41,965 INFO    SenderThread:2252 [dir_watcher.py:__init__():211] watching files in: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files
+2024-07-03 16:59:41,965 INFO    SenderThread:2252 [sender.py:_start_run_threads():1188] run started: mthsqcmb with start time 1720018781.335772
+2024-07-03 16:59:42,046 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: check_version
+2024-07-03 16:59:42,048 DEBUG   SenderThread:2252 [sender.py:send_request():406] send_request: check_version
+2024-07-03 16:59:42,243 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: run_start
+2024-07-03 16:59:42,247 DEBUG   HandlerThread:2252 [system_info.py:__init__():26] System info init
+2024-07-03 16:59:42,247 DEBUG   HandlerThread:2252 [system_info.py:__init__():41] System info init done
+2024-07-03 16:59:42,247 INFO    HandlerThread:2252 [system_monitor.py:start():194] Starting system monitor
+2024-07-03 16:59:42,249 INFO    SystemMonitor:2252 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-07-03 16:59:42,249 INFO    HandlerThread:2252 [system_monitor.py:probe():214] Collecting system info
+2024-07-03 16:59:42,251 INFO    SystemMonitor:2252 [interfaces.py:start():188] Started cpu monitoring
+2024-07-03 16:59:42,254 INFO    SystemMonitor:2252 [interfaces.py:start():188] Started disk monitoring
+2024-07-03 16:59:42,258 INFO    SystemMonitor:2252 [interfaces.py:start():188] Started memory monitoring
+2024-07-03 16:59:42,261 INFO    SystemMonitor:2252 [interfaces.py:start():188] Started network monitoring
+2024-07-03 16:59:42,300 DEBUG   HandlerThread:2252 [system_info.py:probe():152] Probing system
+2024-07-03 16:59:42,311 DEBUG   HandlerThread:2252 [system_info.py:_probe_git():137] Probing git
+2024-07-03 16:59:42,349 DEBUG   HandlerThread:2252 [system_info.py:_probe_git():145] Probing git done
+2024-07-03 16:59:42,349 DEBUG   HandlerThread:2252 [system_info.py:probe():200] Probing system done
+2024-07-03 16:59:42,349 DEBUG   HandlerThread:2252 [system_monitor.py:probe():223] {'os': 'Linux-5.4.276-1.el7.elrepo.x86_64-x86_64-with-glibc2.17', 'python': '3.9.18', 'heartbeatAt': '2024-07-03T14:59:42.301069', 'startedAt': '2024-07-03T14:59:41.284890', 'docker': None, 'cuda': None, 'args': ('--experiment', 'standard_config_spindle', '--test_lab', '', '--save_dir', '/zhome/dd/4/109414/Validationstudy/spindle/results/spindle_test/'), 'state': 'running', 'program': '/zhome/dd/4/109414/Validationstudy/spindle/training_CNN_spindle.py', 'codePathLocal': 'training_CNN_spindle.py', 'codePath': 'training_CNN_spindle.py', 'git': {'remote': 'https://github.com/jgciudad/spindle.git', 'commit': 'f53815dff2a8c6f7dec80cbb9f8c662cacc5f4f4'}, 'email': 'laurarose@sund.ku.dk', 'root': '/zhome/dd/4/109414/Validationstudy/spindle', 'host': 'hpclogin1', 'username': 'laurose', 'executable': '/zhome/dd/4/109414/miniconda3/envs/spindle_javier/bin/python', 'cpu_count': 16, 'cpu_count_logical': 16, 'cpu_freq': {'current': 1440.2534374999998, 'min': 1200.0, 'max': 2900.0}, 'cpu_freq_per_core': [{'current': 1200.068, 'min': 1200.0, 'max': 2900.0}, {'current': 1800.145, 'min': 1200.0, 'max': 2900.0}, {'current': 1600.19, 'min': 1200.0, 'max': 2900.0}, {'current': 1200.002, 'min': 1200.0, 'max': 2900.0}, {'current': 1200.047, 'min': 1200.0, 'max': 2900.0}, {'current': 1200.613, 'min': 1200.0, 'max': 2900.0}, {'current': 1200.087, 'min': 1200.0, 'max': 2900.0}, {'current': 1201.208, 'min': 1200.0, 'max': 2900.0}, {'current': 1200.735, 'min': 1200.0, 'max': 2900.0}, {'current': 2899.999, 'min': 1200.0, 'max': 2900.0}, {'current': 2899.999, 'min': 1200.0, 'max': 2900.0}, {'current': 1599.961, 'min': 1200.0, 'max': 2900.0}, {'current': 1200.015, 'min': 1200.0, 'max': 2900.0}, {'current': 1199.702, 'min': 1200.0, 'max': 2900.0}, {'current': 1200.02, 'min': 1200.0, 'max': 2900.0}, {'current': 1286.123, 'min': 1200.0, 'max': 2900.0}], 'disk': {'/': {'total': 71.9168586730957, 'used': 12.605690002441406}}, 'memory': {'total': 188.26519775390625}}
+2024-07-03 16:59:42,349 INFO    HandlerThread:2252 [system_monitor.py:probe():224] Finished collecting system info
+2024-07-03 16:59:42,349 INFO    HandlerThread:2252 [system_monitor.py:probe():227] Publishing system info
+2024-07-03 16:59:42,350 DEBUG   HandlerThread:2252 [system_info.py:_save_conda():209] Saving list of conda packages installed into the current environment
+2024-07-03 16:59:42,980 INFO    Thread-17 :2252 [dir_watcher.py:_on_file_created():271] file/dir created: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files/conda-environment.yaml
+2024-07-03 16:59:45,287 DEBUG   HandlerThread:2252 [system_info.py:_save_conda():224] Saving conda packages done
+2024-07-03 16:59:45,307 INFO    HandlerThread:2252 [system_monitor.py:probe():229] Finished publishing system info
+2024-07-03 16:59:45,334 DEBUG   SenderThread:2252 [sender.py:send():379] send: files
+2024-07-03 16:59:45,335 INFO    SenderThread:2252 [sender.py:_save_file():1454] saving file wandb-metadata.json with policy now
+2024-07-03 16:59:45,972 INFO    Thread-17 :2252 [dir_watcher.py:_on_file_modified():288] file/dir modified: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files/conda-environment.yaml
+2024-07-03 16:59:45,973 INFO    Thread-17 :2252 [dir_watcher.py:_on_file_created():271] file/dir created: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files/wandb-metadata.json
+2024-07-03 16:59:46,095 INFO    wandb-upload_0:2252 [upload_job.py:push():130] Uploaded file /tmp/tmpp97lovtuwandb/layzdh2h-wandb-metadata.json
+2024-07-03 16:59:46,299 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: python_packages
+2024-07-03 16:59:46,300 DEBUG   SenderThread:2252 [sender.py:send_request():406] send_request: python_packages
+2024-07-03 16:59:46,303 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-03 16:59:46,305 DEBUG   SenderThread:2252 [sender.py:send_request():406] send_request: stop_status
+2024-07-03 16:59:46,323 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-03 16:59:46,584 DEBUG   SenderThread:2252 [sender.py:send():379] send: telemetry
+2024-07-03 16:59:46,585 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 16:59:46,974 INFO    Thread-17 :2252 [dir_watcher.py:_on_file_created():271] file/dir created: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files/requirements.txt
+2024-07-03 16:59:51,587 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 16:59:56,589 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:01,057 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:01,058 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:01,302 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-03 17:00:01,303 DEBUG   SenderThread:2252 [sender.py:send_request():406] send_request: stop_status
+2024-07-03 17:00:02,562 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:07,058 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:07,564 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:12,060 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:12,570 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:13,038 INFO    Thread-17 :2252 [dir_watcher.py:_on_file_modified():288] file/dir modified: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files/config.yaml
+2024-07-03 17:00:16,302 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-03 17:00:16,303 DEBUG   SenderThread:2252 [sender.py:send_request():406] send_request: stop_status
+2024-07-03 17:00:18,588 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:22,062 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:23,590 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:27,064 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:28,591 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:31,302 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-03 17:00:31,303 DEBUG   SenderThread:2252 [sender.py:send_request():406] send_request: stop_status
+2024-07-03 17:00:34,572 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:37,067 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:39,574 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:42,068 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-03 17:00:42,264 DEBUG   SystemMonitor:2252 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-07-03 17:00:42,269 DEBUG   SenderThread:2252 [sender.py:send():379] send: stats
+2024-07-03 17:00:44,576 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:45,114 INFO    Thread-17 :2252 [dir_watcher.py:_on_file_created():271] file/dir created: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files/output.log
+2024-07-03 17:00:47,118 INFO    Thread-17 :2252 [dir_watcher.py:_on_file_modified():288] file/dir modified: /zhome/dd/4/109414/Validationstudy/spindle/wandb/run-20240703_165941-mthsqcmb/files/output.log
+2024-07-03 17:00:49,577 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:54,578 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:00:59,579 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:03,400 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-03 17:01:03,401 DEBUG   SenderThread:2252 [sender.py:send_request():406] send_request: stop_status
+2024-07-03 17:01:04,669 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:09,670 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:12,272 DEBUG   SenderThread:2252 [sender.py:send():379] send: stats
+2024-07-03 17:01:15,274 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:20,275 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:25,276 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:30,277 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:35,278 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:40,279 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:42,274 DEBUG   SenderThread:2252 [sender.py:send():379] send: stats
+2024-07-03 17:01:46,277 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:51,278 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:01:56,279 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:01,281 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:06,282 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:11,283 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:12,277 DEBUG   SenderThread:2252 [sender.py:send():379] send: stats
+2024-07-03 17:02:17,280 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:22,281 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:27,282 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:32,283 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:37,284 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:42,280 DEBUG   SenderThread:2252 [sender.py:send():379] send: stats
+2024-07-03 17:02:43,282 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:48,283 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:53,284 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:02:58,285 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:03,286 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:08,287 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:12,282 DEBUG   SenderThread:2252 [sender.py:send():379] send: stats
+2024-07-03 17:03:14,284 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:19,285 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:24,286 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:29,287 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:34,288 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:39,289 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:42,284 DEBUG   SenderThread:2252 [sender.py:send():379] send: stats
+2024-07-03 17:03:45,287 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:50,288 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:03:55,289 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:04:00,290 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report
+2024-07-03 17:04:05,292 DEBUG   HandlerThread:2252 [handler.py:handle_request():158] handle_request: status_report

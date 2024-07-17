@@ -1,0 +1,10 @@
+Devices available:  [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
+Start of epoch 0
+Epoch 0 metrics: {'categorical_accuracy': 0.9551316, 'f1_score': 0.9265153, 'balance_accuracy': 0.9539515, 'epoch': 0, 'val_f1': 0.954794}
+Start of epoch 1
+Epoch 1 metrics: {'categorical_accuracy': 0.9722251, 'f1_score': 0.95640075, 'balance_accuracy': 0.97313815, 'epoch': 1, 'val_f1': 0.9606309}
+Start of epoch 2
+Early stopping counter: 1 out of 2
+Epoch 2 metrics: {'categorical_accuracy': 0.9748076, 'f1_score': 0.96177715, 'balance_accuracy': 0.97649175, 'epoch': 2, 'val_f1': 0.9532263}
+Start of epoch 3
+Epoch 3 metrics: {'categorical_accuracy': 0.97863746, 'f1_score': 0.96876335, 'balance_accuracy': 0.98063093, 'epoch': 3, 'val_f1': 0.9674196}

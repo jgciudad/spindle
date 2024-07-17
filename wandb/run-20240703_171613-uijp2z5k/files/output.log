@@ -1,0 +1,32 @@
+
+Devices available:  [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
+Start of epoch 0
+Traceback (most recent call last):
+  File "/zhome/dd/4/109414/miniconda3/envs/spindle_javier/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/zhome/dd/4/109414/miniconda3/envs/spindle_javier/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/zhome/dd/4/109414/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39, in <module>
+    cli.main()
+  File "/zhome/dd/4/109414/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430, in main
+    run()
+  File "/zhome/dd/4/109414/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284, in run_file
+    runpy.run_path(target, run_name="__main__")
+  File "/zhome/dd/4/109414/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/zhome/dd/4/109414/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/zhome/dd/4/109414/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124, in _run_code
+    exec(code, run_globals)
+  File "/zhome/dd/4/109414/Validationstudy/spindle/training_CNN_spindle.py", line 143, in <module>
+    metric.update_state(y_batch_train[mask], logits_SS[mask])
+  File "/zhome/dd/4/109414/miniconda3/envs/spindle_javier/lib/python3.9/site-packages/keras/src/utils/metrics_utils.py", line 77, in decorated
+    result = update_state_fn(*args, **kwargs)
+  File "/zhome/dd/4/109414/miniconda3/envs/spindle_javier/lib/python3.9/site-packages/keras/src/metrics/base_metric.py", line 140, in update_state_fn
+    return ag_update_state(*args, **kwargs)
+  File "/zhome/dd/4/109414/miniconda3/envs/spindle_javier/lib/python3.9/site-packages/tensorflow/python/autograph/impl/api.py", line 693, in wrapper
+    raise e.ag_error_metadata.to_exception(e)
+tensorflow.python.autograph.impl.api.StagingError: in user code:
+    File "/zhome/dd/4/109414/Validationstudy/spindle/labdata/metrics.py", line 101, in update_state  *
+        if tf.shape(tf.where(y_true[:, i] == 1))[0] > 0:
+    IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed
