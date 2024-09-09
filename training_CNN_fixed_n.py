@@ -112,13 +112,12 @@ best_val_f1 = -np.inf
 early_stopping_counter = 0
 patience  = 6
 f1_metric = MulticlassF1Score(n_classes=NCLASSES_MODEL_SS, name='f1_score')
+acc_all                = []
+categorical_accuracy = tf.keras.metrics.CategoricalAccuracy()
 
 for epoch in range(epochs):
     print(f"\nStart of epoch {epoch}")
-
-    # Reset metrics at the start of each epoch
-    for metric in metrics_list_SS:
-        metric.reset_states()
+    dl_train.on_epoch_end()
 
     # Iterate over the batches of the dataset.
     for step, (x_batch_train, y_batch_train, y_batch_labs) in enumerate(dl_train.train_dataloader):
@@ -142,28 +141,24 @@ for epoch in range(epochs):
     
     # Evaluate on the validation dataset at the end of each epoch
     f1_metric.reset_states()
+    categorical_accuracy.reset_states()
 
     for x_batch_val, y_batch_val, y_batch_labs in dl_train.val_dataloader:
         val_logits = spindle_model(x_batch_val, training=False)
         mask = y_batch_val != 3    
         f1_metric.update_state(tf.one_hot(y_batch_val[mask], depth=NCLASSES_MODEL_SS), tf.one_hot(np.argmax(val_logits[mask],axis=1),depth=3))
-    
+        categorical_accuracy.update_state(tf.one_hot(y_batch_val[mask], depth=3), tf.one_hot(np.argmax(val_logits[mask],axis=1),depth=3))
+
     val_f1 = f1_metric.result().numpy()
-    
+    val_acc = categorical_accuracy.result().numpy()
+    acc_all.append(val_acc)
+    spindle_model.save_weights(save_path+"epoch"+str(epoch)+".h5")
 
     if val_f1 > best_val_f1:
         best_val_f1 = val_f1
         early_stopping_counter = 0
         # Save the best model checkpoint
-        best_model_path = checkpoint_path + "f1_" + str(val_f1) + "_" + args.test_lab + ".h5"
-        spindle_model.save_weights(best_model_path)
-    else:
-        early_stopping_counter += 1
-        print(f"Early stopping counter: {early_stopping_counter} out of {patience}")
-
-    if early_stopping_counter >= patience:
-        print("Early stopping triggered")
-        break
+        spindle_model.save_weights(save_path+"epoch"+str(epoch)+".h5")
 
     # Log metrics at the end of the epoch
     metrics_log = {metric.name: metric.result().numpy() for metric in metrics_list_SS}
@@ -172,3 +167,4 @@ for epoch in range(epochs):
     wandb.log(metrics_log)
     print(f"Epoch {epoch} metrics: {metrics_log}")
 
+np.save(save_path+'array.npy', np.array(acc_all))

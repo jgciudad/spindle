@@ -115,18 +115,17 @@ val_acc_metric = tf.keras.metrics.CategoricalAccuracy()
 
 # ------------------------------------------------------ TRAINING LOOP -------------------------------------------------------------------
 
-epochs       = config.EPOCHS
-best_val_f1 = -np.inf
+epochs                 = config.EPOCHS
+best_val_f1            = -np.inf
 early_stopping_counter = 0
-patience = 2
-f1_metric = MulticlassF1Score(n_classes=NCLASSES_MODEL_SS, name='f1_score')
+patience               = 10
+f1_metric              = MulticlassF1Score(n_classes=NCLASSES_MODEL_SS, name='f1_score')
+acc_all                = []
+categorical_accuracy = tf.keras.metrics.CategoricalAccuracy()
 
 for epoch in range(epochs):
     print(f"\nStart of epoch {epoch}")
-
-    # Reset metrics at the start of each epoch
-    for metric in metrics_list_SS:
-        metric.reset_states()
+    dl_train.on_epoch_end()
 
     # Iterate over the batches of the dataset.
     for step, (x_batch_train, y_batch_train, y_batch_labs) in enumerate(dl_train.train_dataloader):
@@ -134,9 +133,9 @@ for epoch in range(epochs):
 
             # SPINDLE MODEL 
             logits_SS  = spindle_model(x_batch_train, training=True)  
-            mask = y_batch_train != 3    
+            mask       = y_batch_train != 3    
             loss_value = loss_fn_SS(y_batch_train[mask], logits_SS[mask],y_batch_labs[mask],3,"spindle_ss")  # Compute the loss value for this minibatch
-            grads = tape.gradient(loss_value, spindle_model.trainable_weights)
+            grads      = tape.gradient(loss_value, spindle_model.trainable_weights)
             optimizer.apply_gradients(zip(grads, spindle_model.trainable_weights))
             train_acc_metric.update_state(y_batch_train[mask], logits_SS[mask])
 
@@ -150,26 +149,29 @@ for epoch in range(epochs):
     
     # Evaluate on the validation dataset at the end of each epoch
     f1_metric.reset_states()
+    categorical_accuracy.reset_states()
 
     for x_batch_val, y_batch_val, y_batch_labs in dl_train.val_dataloader:
         val_logits = spindle_model(x_batch_val, training=False)
         mask = y_batch_val != 3    
         f1_metric.update_state(tf.one_hot(y_batch_val[mask], depth=NCLASSES_MODEL_SS), tf.one_hot(np.argmax(val_logits[mask],axis=1),depth=3))
-    
+        categorical_accuracy.update_state(tf.one_hot(y_batch_val[mask], depth=3), tf.one_hot(np.argmax(val_logits[mask],axis=1),depth=3))
+
     val_f1 = f1_metric.result().numpy()
+    val_acc = categorical_accuracy.result().numpy()
+    acc_all.append(val_acc)
 
     if val_f1 > best_val_f1:
         best_val_f1 = val_f1
         early_stopping_counter = 0
         # Save the best model checkpoint
-        spindle_model.save_weights(checkpoint_path+"f1"+str(val_f1)+".h5")
+        spindle_model.save_weights(save_path+"epoch"+str(epoch)+".h5")
     else:
         early_stopping_counter += 1
         print(f"Early stopping counter: {early_stopping_counter} out of {patience}")
 
     if early_stopping_counter >= patience:
         print("Early stopping triggered")
-        break
 
     # Log metrics at the end of the epoch
     metrics_log = {metric.name: metric.result().numpy() for metric in metrics_list_SS}
@@ -177,6 +179,72 @@ for epoch in range(epochs):
     metrics_log["val_f1"] = val_f1
     wandb.log(metrics_log)
     print(f"Epoch {epoch} metrics: {metrics_log}")
+
+np.save(save_path+'array.npy', np.array(acc_all))
+
+
+# epochs       = config.EPOCHS
+# best_val_f1 = -np.inf
+# early_stopping_counter = 0
+# patience = 2
+# f1_metric = MulticlassF1Score(n_classes=NCLASSES_MODEL_SS, name='f1_score')
+
+# for epoch in range(epochs):
+#     print(f"\nStart of epoch {epoch}")
+
+#     # Reset metrics at the start of each epoch
+#     for metric in metrics_list_SS:
+#         metric.reset_states()
+
+#     # Iterate over the batches of the dataset.
+#     for step, (x_batch_train, y_batch_train, y_batch_labs) in enumerate(dl_train.train_dataloader):
+#         with tf.GradientTape() as tape:
+
+#             # SPINDLE MODEL 
+#             logits_SS  = spindle_model(x_batch_train, training=True)  
+#             mask = y_batch_train != 3    
+#             loss_value = loss_fn_SS(y_batch_train[mask], logits_SS[mask],y_batch_labs[mask],3,"spindle_ss")  # Compute the loss value for this minibatch
+#             grads = tape.gradient(loss_value, spindle_model.trainable_weights)
+#             optimizer.apply_gradients(zip(grads, spindle_model.trainable_weights))
+#             train_acc_metric.update_state(y_batch_train[mask], logits_SS[mask])
+
+#             for metric in metrics_list_SS:
+#                 metric.update_state(tf.one_hot(y_batch_train[mask], depth=3), tf.one_hot(np.argmax(logits_SS[mask],axis=1),depth=3))
+            
+#             if step % 20 == 0: 
+#                 metrics_log = {metric.name: metric.result().numpy() for metric in metrics_list_SS}
+#                 metrics_log["loss"] = loss_value.numpy()
+#                 wandb.log(metrics_log)
+    
+#     # Evaluate on the validation dataset at the end of each epoch
+#     f1_metric.reset_states()
+
+#     for x_batch_val, y_batch_val, y_batch_labs in dl_train.val_dataloader:
+#         val_logits = spindle_model(x_batch_val, training=False)
+#         mask = y_batch_val != 3    
+#         f1_metric.update_state(tf.one_hot(y_batch_val[mask], depth=NCLASSES_MODEL_SS), tf.one_hot(np.argmax(val_logits[mask],axis=1),depth=3))
+
+#     val_f1 = f1_metric.result().numpy()
+
+#     if val_f1 > best_val_f1:
+#         best_val_f1 = val_f1
+#         early_stopping_counter = 0
+#         # Save the best model checkpoint
+#         spindle_model.save_weights(checkpoint_path+"f1"+str(val_f1)+".h5")
+#     else:
+#         early_stopping_counter += 1
+#         print(f"Early stopping counter: {early_stopping_counter} out of {patience}")
+
+#     if early_stopping_counter >= patience:
+#         print("Early stopping triggered")
+#         break
+
+#     # Log metrics at the end of the epoch
+#     metrics_log = {metric.name: metric.result().numpy() for metric in metrics_list_SS}
+#     metrics_log["epoch"] = epoch
+#     metrics_log["val_f1"] = val_f1
+#     wandb.log(metrics_log)
+#     print(f"Epoch {epoch} metrics: {metrics_log}")
 
 # -------------------------------------------------------------------------------------------------------------------------
 

@@ -113,7 +113,7 @@ def plot_cm(true,pred,normalize=False,
         cmap2 = LinearSegmentedColormap.from_list("custom_cmap", shades)
 
     # Create the plot
-    fig, ax = plt.subplots(figsize=(4, 4))
+    fig, ax = plt.subplots(figsize=(5, 5))
     labels = ["Wake","NREM","REM"] 
     norm = None    
     im = ax.imshow(normalized_cm, interpolation='nearest', cmap=cmap2, norm=norm)
